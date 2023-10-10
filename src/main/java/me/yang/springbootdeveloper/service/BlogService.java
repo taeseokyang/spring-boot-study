@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
-@Service
+@RequiredArgsConstructor // final or @NotNull 이 붙는 필드의 생성자 추가
+@Service // 빈으로 등록
 public class BlogService {
     private final BlogRepository blogRepository;
 
     public Article save(AddArticleRequest request){
-        return blogRepository.save(request.toEntity());
+        return blogRepository.save(request.toEntity());//article 객체 가져와서 데이터베이스에 입력
     }
 
     public List<Article> findAll(){

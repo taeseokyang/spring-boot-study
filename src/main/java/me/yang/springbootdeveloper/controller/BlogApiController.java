@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RestController
+@RestController //객체 데이터 json 형식으로 반환
 public class BlogApiController {
-    private  final BlogService blogService;
+    private final BlogService blogService;
 
     @PostMapping("/api/articles")
-    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){
+    public ResponseEntity<Article> addArticle(@RequestBody AddArticleRequest request){//@RequestBody 본문 객체로 전달
         Article saveArticle = blogService.save(request);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -37,7 +37,7 @@ public class BlogApiController {
     }
 
     @GetMapping("/api/articles/{id}")
-    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){
+    public ResponseEntity<ArticleResponse> findArticle(@PathVariable long id){//주소에 있는 값 전달
         Article article = blogService.findById(id);
 
         return ResponseEntity.ok()
